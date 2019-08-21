@@ -22,17 +22,14 @@ import java.util.List;
  */
 @Theme("mytheme")
 public class MyUI extends UI {
-    private CustomerService service = CustomerService.getInstance();
-    private Grid<Customer> grid = new Grid<>(Customer.class);
-    private TextField filterText = new TextField();
-    private CustomerForm customerForm = new CustomerForm(this);
-//    private WorkReportView workReportView = new WorkReportView(this);
+
+    private WorkReportView workReportView = new WorkReportView(this);
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         ReportView reportView = new ReportView(this);
         reportView.setVisible(true);
         setContent(reportView);
-
+//        UI.getCurrent().addWindow(workReportView);
 
 
 
@@ -73,9 +70,5 @@ public class MyUI extends UI {
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
-    }
-    public void updateList(){
-        List<Customer> customerList = service.findAll(filterText.getValue());
-        grid.setItems(customerList);
-    }
+    } 
 }
